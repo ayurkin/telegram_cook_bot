@@ -8,7 +8,7 @@ app.secret_key = 'alex'
 
 
 class Item(Resource):
-    def write_json(data, filename='answer.json'):
+    def write_json(self, data, filename='answer.json'):
         with open(filename, 'w') as f:
             json.dump(data, f, indent=4, ensure_ascii=False)
 
@@ -16,6 +16,9 @@ class Item(Resource):
         data = request.get_json(force=True)
         self.write_json(data)
         return jsonify(data)
+
+    def get(self):
+        return {'message': 'Hello'}
 
 
 api.add_resource(Item, '/')
